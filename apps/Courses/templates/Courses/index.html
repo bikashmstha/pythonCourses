@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Courses</title>
+	<style>
+		body {
+			font-family: 'Arial', sans serif;
+		}
+		table {
+			border: 1px solid darkgray;
+		}
+	</style>
+</head>
+<body>
+<h2>Add a new course</h2>
+<form action="addcourse" method="post">
+{% csrf_token %}
+<p>Name: <input type="text" name="name" placeholder="Name"></p>
+<p>Description: <textarea name="description"></textarea></p>
+<p><input style="background-color: green; color:white;"; type="submit" value="Add"></form></p>
+</form>
+
+<h2>Courses</h2>
+<table>
+	<tr>
+		<td style="font-weight: bold;">Course Name</td>
+		<td style="font-weight: bold;">Description</td>
+		<td style="font-weight: bold;">Actions</td>
+	</tr>
+	{% for course in courses %}
+	<tr>
+		<td>{{course.name}}</td>
+		<td>{{course.description}}</td>
+		<td>{{course.created_at}}</td>
+		<td><a href="show/{{course.id}}">Remove</a></td>
+	</tr>
+	{% endfor %}
+</table>
+</body>
+</html>
