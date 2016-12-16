@@ -9,10 +9,27 @@
 		table {
 			border: 1px solid darkgray;
 		}
+		a:link, a:hover, a:visited, a:active {
+			text-decoration: none;
+		}
+		a:hover {
+			text-decoration: none;
+		}
+		a:visited {
+			text-decoration: none;
+		}
+		a:active {
+			text-decoration: none;
+		}
+		a {
+			color: ##900C3F;
+			text-decoration: none;
+
+		}
 	</style>
 </head>
 <body>
-<h2>Add a new course</h2>
+<h2>Add a New Course</h2>
 <form action="addcourse" method="post">
 {% csrf_token %}
 <p>Name: <input type="text" name="name" placeholder="Name"></p>
