@@ -25,7 +25,7 @@ SECRET_KEY = '-_i2b=4$_sbm#-9ute@rxs**9^psp(j4vqpl4p-^5diu8vd)vz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [54.214.223.155]
+ALLOWED_HOSTS = ['54.214.223.155','localhost', 'd1.sjfluin.com']
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
