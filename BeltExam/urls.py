@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^', include('apps.Courses.urls'))
+    url(r'^', include('apps.poke.urls'))
 ]
