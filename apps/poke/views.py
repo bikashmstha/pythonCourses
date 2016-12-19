@@ -49,7 +49,7 @@ def pokes(request):
 	"users": User.objects.all().exclude(id=userid),
 	"userpoked": Pokes.objects.filter(poked__id=userid),
 	"allpokes": Pokes.objects.all(),
-	"userpokedcount": Pokes.objects.filter(poked__id=userid).values('user__name').annotate(Count('user')),
+	"userpokedcount": Pokes.objects.filter(poked__id=userid).values('user__name').annotate(Count('user')).order_by('user__count'),
 	"eachuserpokecount": Pokes.objects.all().values('poked','poked__name').annotate(Count('poked'))
 	}
 	return render (request, 'poke/pokes.html', context)
