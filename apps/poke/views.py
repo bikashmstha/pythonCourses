@@ -47,12 +47,10 @@ def pokes(request):
 	context = {
 	"thisuser": loggedinuser,
 	"users": User.objects.all().exclude(id=userid),
-	"userpoked": Pokes.objects.filter(poked__id=userid), #where this user has been poked
+	"userpoked": Pokes.objects.filter(poked__id=userid),
 	"allpokes": Pokes.objects.all(),
-	# "allpokecounts": Pokes.objects.all().count(),
-	"userpokedcount": Pokes.objects.filter(poked__id=userid).values('user').annotate(Count('user')).count()
-	########## "allquotes": Quote.objects.all().exclude(favoritequote__user__id=userid).order_by('-created_at'),
-	########## "favoritequotes": Favorite.objects.filter(user__id = userid)
+	"userpokedcount": Pokes.objects.filter(poked__id=userid).values('user__name').annotate(Count('user')),
+	"eachuserpokecount": Pokes.objects.all().values('poked','poked__name').annotate(Count('poked'))
 	}
 	return render (request, 'poke/pokes.html', context)
 
