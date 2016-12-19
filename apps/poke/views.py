@@ -47,7 +47,7 @@ def pokes(request):
 	context = {
 	"thisuser": loggedinuser,
 	"users": User.objects.all().exclude(id=userid),
-	"userpoked": Pokes.objects.filter(poked__id=userid), #where this user has been poked
+	"userpoked": Pokes.objects.filter(poked__id=userid).order_by('-name'), #where this user has been poked
 	"allpokes": Pokes.objects.all(),
 	# "allpokecounts": Pokes.objects.all().count(),
 	"userpokedcount": Pokes.objects.filter(poked__id=userid).values('user').annotate(Count('user')).count()

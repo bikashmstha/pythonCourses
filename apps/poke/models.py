@@ -11,7 +11,7 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 class PokerManager(models.Manager):
 	def pokeauser(self, formdata, user_id):
 		Pokes.objects.create(user_id=user_id, poked_id=formdata['thepoked'])
-		return True	
+		return True
 
 class UserManager(models.Manager):
 	def loginvalidation(self, formdata):
@@ -88,6 +88,7 @@ class UserManager(models.Manager):
 			errormessage.append("Please enter your birthday.")
 
 		if error:
+			validregistration = (False, errormessage)
 			return validregistration
 
 		else:
@@ -112,7 +113,7 @@ class UserManager(models.Manager):
 				errormessage.append("Please enter a first name of at least 2 characters long.")
 			print validregistration, error, "firstname"
 			# Check that last name is of proper length:
-			if len(formdata['alias']) < 2: 
+			if len(formdata['alias']) < 2:
 				error = True
 				errormessage.append("Please enter a last name of at least 2 characters long.")
 			print validregistration, error, "lastname"
@@ -127,8 +128,8 @@ class UserManager(models.Manager):
 
 			# Check for format
 			if error:
-				print validregistration, error, "if error check"
-				return validregistration	
+				validregistration = (False, errormessage)
+				return validregistration
 
 			else:
 				print "now trying to create a user object"
@@ -138,9 +139,6 @@ class UserManager(models.Manager):
 				thisuser = User.objects.create(name=formdata['name'], alias=formdata['alias'], email=formdata['email'], encrypted_password=bcrypt.hashpw(password, bcrypt.gensalt()), birthday=formdata['birthday'])
 				print "object successfully created"
 				validregistration = (True, thisuser)
-				print validregistration
-				print thisuser
-				return validregistration
 			return validregistration
 
 # User DB Table
